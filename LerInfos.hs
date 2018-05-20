@@ -32,6 +32,7 @@ lerInfo = do
                 handle <- openFile "calendario.txt" ReadMode
                 op <- hGetLine handle
                 _infos <- _lerInfo handle 1 []
+                hClose handle
                 if op == "False" then
                         return (False, reverse (_infos))
                 else

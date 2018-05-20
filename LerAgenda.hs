@@ -3,10 +3,12 @@ module LerAgenda(
 )where
 import System.IO 
 
+lerHoras :: Handle -> IO [(Int,Int)]
 lerHoras handle = do
                   horas <- hGetLine handle
                   return (read horas :: [(Int,Int)])
 
+lerDia :: Handle -> [(Int,[(Int,Int)])] -> IO [(Int,[(Int,Int)])]
 lerDia handle dias = do
                     final <- hIsEOF handle
                     if final then
@@ -22,6 +24,7 @@ lerDia handle dias = do
                                             horas <- lerHoras  handle
                                             lerDia handle ((read dia,horas):dias)
 
+lerMes :: Handle -> [(Int,[(Int,[(Int,Int)])])] -> IO [(Int,[(Int,[(Int,Int)])])]
 lerMes handle meses = do
                         final <- hIsEOF handle
                         if final then
@@ -40,4 +43,5 @@ lerAgenda :: IO [(Int, [(Int, [(Int, Int)])])]
 lerAgenda = do
             handle <- openFile "agenda.txt" ReadMode
             agenda <- lerMes handle []
+            hClose handle
             return agenda
