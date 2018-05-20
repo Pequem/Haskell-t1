@@ -17,7 +17,7 @@ disponivelHora [] (_ha,_da) hora duracao horaAjustada =  if (_da+_ha) > hora the
                                                                 [] 
                                                             else
                                                                 [(_ha, _da)]
-disponivelHora ((_hora,_duracao):horas) (_ha,_da) hora duracao horaAjustada =    if ((_hora+_duracao) > 12) && (not (horaAjustada)) then
+disponivelHora ((_hora,_duracao):horas) (_ha,_da) hora duracao horaAjustada =    if ((_hora+_duracao) > 12) && (_hora < 12) && (not (horaAjustada)) then
                                                                                     disponivelHora ((_hora, _duracao+2):horas) (_ha, _da) hora duracao True 
                                                                                 else
                                                                                 if hora == _hora then

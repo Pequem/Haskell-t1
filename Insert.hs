@@ -16,13 +16,13 @@ _insertHora ((_hora,_duracao):horas) hora duracao | _hora > hora = (hora,duracao
 _insertDia :: [(Int,[(Int,Int)])] -> [(Int, Int)] -> Int -> Int ->Int  -> [(Int,[(Int,Int)])]
 _insertDia [] horasA dia hora duracao = [(dia,[(hora, duracao)])]
 _insertDia ((_dia, horas):dias) horasA dia hora duracao | dia == _dia = (_dia,(_insertHora horas hora duracao)):dias 
-                                                        | _dia > dia = (dia, (_insertHora horasA hora duracao)):(_dia, horas):dias
+                                                        | _dia > dia = (dia, (_insertHora [] hora duracao)):(_dia, horas):dias
                                                         | True = (_dia,horas):(_insertDia dias horas dia hora duracao)
 
 _insert :: [(Int,[(Int, [(Int, Int)])])] -> [(Int, [(Int,Int)])] -> Int -> Int -> Int -> Int -> [(Int,[(Int, [(Int, Int)])])]
 _insert [] diasA mes dia hora duracao = [(mes,[(dia,[(hora,duracao)])])]
 _insert ((_mes,dias):agenda) diasA mes dia hora duracao | mes == _mes = (mes, (_insertDia dias [] dia hora duracao)):agenda
-                                                        | _mes > mes = (mes, _insertDia diasA [] dia hora duracao):(_mes,dias):agenda
+                                                        | _mes > mes = (mes, _insertDia [] [] dia hora duracao):(_mes,dias):agenda
                                                         | True = (_mes,dias):_insert agenda diasA mes dia hora duracao
 
 insert :: [(Int,[(Int, [(Int, Int)])])] -> (Bool, [(Int, Int)]) -> Int -> Int -> Int -> Int -> [(Int,[(Int, [(Int, Int)])])]

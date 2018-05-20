@@ -1,4 +1,4 @@
-module Menu(
+module Main(
         main
 ) where
 import Insert
@@ -37,12 +37,16 @@ trataOpcao1 = lerAgenda
 trataOpcao2 :: [(Int,[(Int,[(Int,Int)])])] -> (Bool, [(Int,Int)]) -> IO Bool
 trataOpcao2 agenda info = do
                             putStr "mes:"
+                            hFlush stdout
                             mes <- getLine
                             putStr "dia:" 
+                            hFlush stdout
                             dia <- getLine
                             putStr "hora:"
+                            hFlush stdout
                             hora <- getLine
                             putStr "duracao:"
+                            hFlush stdout
                             duracao <- getLine
                             if not ((mes == "") || (dia == "") || (hora == "") || (duracao == "")) then
                                 return (disponivel agenda info (read mes) (read dia) (read hora) (read duracao))
@@ -52,8 +56,10 @@ trataOpcao2 agenda info = do
 trataOpcao3 :: [(Int,[(Int,[(Int,Int)])])] -> (Bool, [(Int,Int)]) -> IO [Int]
 trataOpcao3 agenda info = do
                             putStr "mes:"
+                            hFlush stdout
                             mes <- getLine
                             putStr "dia:" 
+                            hFlush stdout
                             dia <- getLine
                             if not ((mes == "") || (dia == "")) then
                                 return (horariosDisponiveisDoDia agenda info (read mes) (read dia))
@@ -63,12 +69,16 @@ trataOpcao3 agenda info = do
 trataOpcao4 :: [(Int,[(Int,[(Int,Int)])])] -> (Bool, [(Int,Int)]) -> IO [(Int,[(Int,[(Int,Int)])])]
 trataOpcao4 agenda info = do
                             putStr "mes:"
+                            hFlush stdout
                             mes <- getLine
                             putStr "dia:" 
+                            hFlush stdout
                             dia <- getLine
                             putStr "hora:"
+                            hFlush stdout
                             hora <- getLine
                             putStr "duracao:"
+                            hFlush stdout
                             duracao <- getLine
                             if not ((mes == "") || (dia == "") || (hora == "") || (duracao == "")) then
                                 return (insert agenda info (read mes) (read dia) (read hora) (read duracao))
@@ -78,10 +88,13 @@ trataOpcao4 agenda info = do
 trataOpcao5 :: [(Int,[(Int,[(Int,Int)])])] -> (Bool, [(Int,Int)]) -> IO [(Int,[(Int,[(Int,Int)])])]
 trataOpcao5 agenda info = do
                             putStr "mes:"
+                            hFlush stdout
                             mes <- getLine
                             putStr "dia:" 
+                            hFlush stdout
                             dia <- getLine
                             putStr "duracao:"
+                            hFlush stdout
                             duracao <- getLine
                             if not ((mes == "") || (dia == "") || (duracao == "")) then
                                 return (insereBreve agenda info (read mes) (read dia) (read duracao))
@@ -91,8 +104,10 @@ trataOpcao5 agenda info = do
 trataOpcao6 :: [(Int,[(Int,[(Int,Int)])])] -> (Bool, [(Int,Int)]) -> IO [(Int,[(Int,[(Int,Int)])])]
 trataOpcao6 agenda info = do
                             putStr "mes:"
+                            hFlush stdout
                             mes <- getLine
                             putStr "duracao:"
+                            hFlush stdout
                             duracao <- getLine
                             if not ((mes == "") || (duracao == "")) then
                                 return (insereMenor agenda info (read mes) (read duracao))
@@ -102,8 +117,10 @@ trataOpcao6 agenda info = do
 trataOpcao7 :: [(Int,[(Int,[(Int,Int)])])] -> (Bool, [(Int,Int)]) -> IO [(Int,[(Int,[(Int,Int)])])]
 trataOpcao7 agenda info = do
                             putStr "mes:"
+                            hFlush stdout
                             mes <- getLine
                             putStr "duracao:"
+                            hFlush stdout
                             duracao <- getLine
                             if not ((mes == "") || (duracao == "")) then
                                 return (insereMaior agenda info (read mes) (read duracao))
@@ -113,10 +130,13 @@ trataOpcao7 agenda info = do
 trataOpcao8 :: [(Int,[(Int,[(Int,Int)])])] -> (Bool, [(Int,Int)]) -> IO [(Int,[(Int,[(Int,Int)])])]
 trataOpcao8 agenda info = do
                             putStr "mes:"
+                            hFlush stdout
                             mes <- getLine
-                            putStr "dia:" 
+                            putStr "dia:"
+                            hFlush stdout
                             dia <- getLine
                             putStr "hora:"
+                            hFlush stdout
                             hora <- getLine
                             if not ((mes == "") || (dia == "") || (hora == "")) then
                                 return (cancel agenda (read mes) (read dia) (read hora))
@@ -126,18 +146,25 @@ trataOpcao8 agenda info = do
 trataOpcao9 :: [(Int,[(Int,[(Int,Int)])])] -> (Bool, [(Int,Int)]) -> IO [(Int,[(Int,[(Int,Int)])])]
 trataOpcao9 agenda info = do
                             putStr "mes Antigo:"
+                            hFlush stdout
                             ames <- getLine
                             putStr "dia Antigo:" 
+                            hFlush stdout
                             adia <- getLine
                             putStr "hora Antigo:"
+                            hFlush stdout
                             ahora <- getLine
                             putStr "mes:"
+                            hFlush stdout
                             mes <- getLine
                             putStr "dia:" 
+                            hFlush stdout
                             dia <- getLine
                             putStr "hora:"
+                            hFlush stdout
                             hora <- getLine
                             putStr "duracao:"
+                            hFlush stdout
                             duracao <- getLine
                             if not ((ames == "") || (adia == "") || (ahora == "") || (mes == "") || (dia == "") || (hora == "") || (duracao == "")) then
                                 return (reagendar agenda info (read ames) (read adia) (read ahora) (read mes) (read dia) (read hora) (read duracao))
@@ -198,6 +225,7 @@ loop :: [(Int,[(Int,[(Int,Int)])])] -> (Bool, [(Int,Int)]) -> IO ()
 loop agenda infos = do
                     putStrLn (show agenda)
                     imprimeOpcoes
+                    hFlush stdout
                     op <- getLine
                     if op == "0" then
                         return ()
